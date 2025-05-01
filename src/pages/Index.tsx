@@ -5,8 +5,10 @@ import ImageCarousel from "@/components/ImageCarousel";
 import AnimatedSection from "@/components/AnimatedSection";
 import ServiceCard from "@/components/ServiceCard";
 import TestimonialCard from "@/components/TestimonialCard";
+import ProjectCard from "@/components/ProjectCard";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { projects } from "./Projects";
 
 const Index = () => {
   const heroImages = [
@@ -75,6 +77,9 @@ const Index = () => {
     },
   ];
 
+  // Get featured projects (first 3)
+  const featuredProjects = projects.slice(0, 3);
+
   return (
     <Layout>
       {/* Hero Section with Carousel */}
@@ -133,8 +138,44 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Services Preview */}
+      {/* Featured Projects Section - NEW SECTION */}
       <section className="py-20 px-6 bg-gray-50">
+        <div className="container mx-auto">
+          <AnimatedSection animation="fade-up" className="text-center mb-14">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-4">Featured Projects</h2>
+            <div className="w-24 h-1 bg-photo-accent mx-auto mb-6"></div>
+            <p className="max-w-2xl mx-auto text-gray-600">
+              Explore some of our recent photography projects across different styles and occasions.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {featuredProjects.map((project, index) => (
+              <AnimatedSection key={project.id} animation="fade-up" delay={index * 100}>
+                <ProjectCard 
+                  id={project.id}
+                  title={project.title}
+                  category={project.category}
+                  image={project.image}
+                  description={project.description}
+                />
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <AnimatedSection animation="fade-up" delay={400} className="text-center mt-12">
+            <Button 
+              asChild 
+              className="bg-photo-accent hover:bg-photo-accent/90 text-white"
+            >
+              <Link to="/projects">View All Projects</Link>
+            </Button>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Services Preview */}
+      <section className="py-20 px-6 bg-white">
         <div className="container mx-auto">
           <AnimatedSection animation="fade-up" className="text-center mb-14">
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-4">Our Services</h2>
@@ -164,7 +205,7 @@ const Index = () => {
       </section>
 
       {/* Portfolio Preview */}
-      <section className="py-20 px-6 bg-white">
+      <section className="py-20 px-6 bg-gray-50">
         <div className="container mx-auto">
           <AnimatedSection animation="fade-up" className="text-center mb-14">
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-4">Our Portfolio</h2>
@@ -215,7 +256,7 @@ const Index = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 px-6 bg-gray-50">
+      <section className="py-20 px-6 bg-white">
         <div className="container mx-auto">
           <AnimatedSection animation="fade-up" className="text-center mb-14">
             <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-4">Client Testimonials</h2>
