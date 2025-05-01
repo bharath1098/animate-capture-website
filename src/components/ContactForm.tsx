@@ -1,9 +1,10 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import initEmailJS, { sendContactEmail } from "@/utils/emailjs";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +15,11 @@ const ContactForm = () => {
   });
   
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Initialize EmailJS when component mounts
+  useEffect(() => {
+    initEmailJS();
+  }, []);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -39,18 +45,21 @@ const ContactForm = () => {
     
     setIsSubmitting(true);
     
-    // Simulating API call for form submission
     try {
-      // In a real implementation, you would send this data to your backend or use a service like EmailJS
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      // Send email using EmailJS
+      const response = await sendContactEmail(formData);
       
-      toast.success("Message sent successfully! We'll get back to you soon.");
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-      });
+      if (response.success) {
+        toast.success("Message sent successfully! We'll get back to you soon.");
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        toast.error("Failed to send message. Please try again later.");
+      }
     } catch (error) {
       toast.error("Failed to send message. Please try again later.");
       console.error("Form submission error:", error);
