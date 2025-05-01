@@ -1,13 +1,262 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React from "react";
+import Layout from "@/components/Layout";
+import ImageCarousel from "@/components/ImageCarousel";
+import AnimatedSection from "@/components/AnimatedSection";
+import ServiceCard from "@/components/ServiceCard";
+import TestimonialCard from "@/components/TestimonialCard";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const Index = () => {
+  const heroImages = [
+    {
+      src: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
+      alt: "Beautiful mountain landscape at dawn",
+      title: "Capturing Life's Precious Moments",
+      subtitle: "Elegant photography that tells your unique story",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1469474968028-56623f02e42e",
+      alt: "Landscape photography of mountain with sun rays",
+      title: "Artistry in Every Frame",
+      subtitle: "Creating timeless memories through the lens",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1501854140801-50d01698950b",
+      alt: "Bird's eye view photograph of green mountains",
+      title: "Breathtaking Perspectives",
+      subtitle: "Discover the world through our unique vision",
+    },
+  ];
+
+  const featuredServices = [
+    {
+      title: "Portrait Photography",
+      description: "Authentic portraits that capture your true essence and personality in stunning detail.",
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
+      pricing: "From $299",
+      link: "/services",
+      features: ["Indoor & Outdoor Sessions", "Professional Editing", "Digital Files Included"],
+    },
+    {
+      title: "Wedding Photography",
+      description: "Documenting your special day with creativity, emotion, and attention to every precious moment.",
+      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+      pricing: "From $1,499",
+      link: "/services",
+      features: ["Full Day Coverage", "Second Photographer", "Wedding Album Design"],
+    },
+    {
+      title: "Commercial Photography",
+      description: "Elevate your brand with stunning commercial photography that tells your unique story.",
+      image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7",
+      pricing: "Custom Quotes",
+      link: "/services",
+      features: ["Product Photography", "Brand Storytelling", "Marketing Assets"],
+    },
+  ];
+
+  const testimonials = [
+    {
+      quote: "Working with this photography team was an absolute pleasure. They captured our wedding day perfectly, and the photos exceeded our expectations.",
+      author: "Sarah & Michael",
+      role: "Wedding Clients",
+    },
+    {
+      quote: "The attention to detail and creativity shown in our family portraits was incredible. We'll cherish these photos forever!",
+      author: "Jennifer Smith",
+      role: "Family Portrait Session",
+    },
+    {
+      quote: "The commercial photography for our brand has transformed our marketing materials. Professional, creative, and exactly what we needed.",
+      author: "David Wilson",
+      role: "Marketing Director",
+    },
+  ];
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <Layout>
+      {/* Hero Section with Carousel */}
+      <section className="relative">
+        <ImageCarousel 
+          images={heroImages}
+          autoplay={true}
+          showDots={true}
+          showArrows={true}
+          textPosition="center"
+          height="h-screen"
+        />
+      </section>
+
+      {/* About Preview Section */}
+      <section className="py-20 px-6 bg-white">
+        <div className="container mx-auto">
+          <AnimatedSection animation="fade-up" className="text-center mb-14">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-4">Elegance in Every Frame</h2>
+            <div className="w-24 h-1 bg-photo-accent mx-auto mb-6"></div>
+            <p className="max-w-2xl mx-auto text-gray-600">
+              With over a decade of experience capturing life's most beautiful moments, 
+              we blend technical excellence with artistic vision to create photographs 
+              that will be cherished for generations.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            <AnimatedSection animation="fade-right" delay={100}>
+              <img
+                src="https://images.unsplash.com/photo-1523712999610-f77fbcfc3843"
+                alt="Photographer in nature"
+                className="w-full h-auto rounded-lg shadow-lg"
+              />
+            </AnimatedSection>
+
+            <AnimatedSection animation="fade-left" delay={200} className="space-y-6">
+              <h3 className="font-serif text-2xl md:text-3xl">Passionate About Creating Timeless Images</h3>
+              <p className="text-gray-600">
+                We believe that photography is about more than just taking pictures – it's about telling stories,
+                preserving emotions, and creating art that speaks to the heart. Every shoot is approached with
+                creativity, attention to detail, and a commitment to excellence.
+              </p>
+              <p className="text-gray-600">
+                Whether it's a wedding day, family portrait, or commercial project, we invest our heart and soul
+                into creating images that exceed expectations.
+              </p>
+              <Button 
+                asChild 
+                className="bg-photo-accent hover:bg-photo-accent/90 text-white mt-4"
+              >
+                <Link to="/about">Learn More About Us</Link>
+              </Button>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Preview */}
+      <section className="py-20 px-6 bg-gray-50">
+        <div className="container mx-auto">
+          <AnimatedSection animation="fade-up" className="text-center mb-14">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-4">Our Services</h2>
+            <div className="w-24 h-1 bg-photo-accent mx-auto mb-6"></div>
+            <p className="max-w-2xl mx-auto text-gray-600">
+              Explore our range of professional photography services tailored to meet your unique needs.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredServices.map((service, index) => (
+              <AnimatedSection key={service.title} animation="fade-up" delay={index * 100}>
+                <ServiceCard {...service} />
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <AnimatedSection animation="fade-up" delay={400} className="text-center mt-12">
+            <Button 
+              asChild 
+              className="bg-photo-accent hover:bg-photo-accent/90 text-white"
+            >
+              <Link to="/services">View All Services</Link>
+            </Button>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Portfolio Preview */}
+      <section className="py-20 px-6 bg-white">
+        <div className="container mx-auto">
+          <AnimatedSection animation="fade-up" className="text-center mb-14">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-4">Our Portfolio</h2>
+            <div className="w-24 h-1 bg-photo-accent mx-auto mb-6"></div>
+            <p className="max-w-2xl mx-auto text-gray-600">
+              Browse through a selection of our favorite photographs from recent projects.
+            </p>
+          </AnimatedSection>
+
+          <AnimatedSection animation="fade-up" delay={200}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                "https://images.unsplash.com/photo-1458668383970-8ddd3927deed",
+                "https://images.unsplash.com/photo-1504893524553-b855bce32c67",
+                "https://images.unsplash.com/photo-1426604966848-d7adac402bff",
+                "https://images.unsplash.com/photo-1615729947596-a598e5de0ab3",
+                "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb",
+                "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86"
+              ].map((src, index) => (
+                <div 
+                  key={index} 
+                  className="relative aspect-square overflow-hidden photo-hover group cursor-pointer"
+                >
+                  <img 
+                    src={src} 
+                    alt={`Portfolio image ${index + 1}`} 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-photo-dark bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
+                    <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-lg font-medium">
+                      View
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection animation="fade-up" delay={400} className="text-center mt-12">
+            <Button 
+              asChild 
+              className="bg-photo-accent hover:bg-photo-accent/90 text-white"
+            >
+              <Link to="/portfolio">View Full Portfolio</Link>
+            </Button>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 px-6 bg-gray-50">
+        <div className="container mx-auto">
+          <AnimatedSection animation="fade-up" className="text-center mb-14">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-4">Client Testimonials</h2>
+            <div className="w-24 h-1 bg-photo-accent mx-auto mb-6"></div>
+            <p className="max-w-2xl mx-auto text-gray-600">
+              Don't just take our word for it. Here's what our clients have to say.
+            </p>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <AnimatedSection key={index} animation="fade-up" delay={index * 100}>
+                <TestimonialCard {...testimonial} />
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact CTA */}
+      <section 
+        className="py-24 bg-photo-dark bg-opacity-90 text-white bg-cover bg-center bg-blend-overlay"
+        style={{ backgroundImage: "url(https://images.unsplash.com/photo-1470813740244-df37b8c1edcb)" }}
+      >
+        <div className="container mx-auto px-6 text-center">
+          <AnimatedSection animation="fade-up">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl mb-6">Ready to Capture Your Story?</h2>
+            <p className="max-w-2xl mx-auto mb-8 text-gray-300">
+              Let's create beautiful photographs together. Contact us today to discuss your project or book a session.
+            </p>
+            <Button 
+              asChild 
+              className="bg-photo-accent hover:bg-photo-accent/90 text-white px-8 py-6"
+              size="lg"
+            >
+              <Link to="/contact">Get in Touch</Link>
+            </Button>
+          </AnimatedSection>
+        </div>
+      </section>
+    </Layout>
   );
 };
 
