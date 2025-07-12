@@ -49,7 +49,7 @@ const PhotoGallery: React.FC<PhotoGalleryProps> = ({
               alt={photo.alt} 
               className="w-full h-auto object-cover"
               loading="lazy"
-            />
+            /> 
           </div>
         ))}
         

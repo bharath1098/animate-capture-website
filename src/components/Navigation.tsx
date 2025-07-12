@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
@@ -18,11 +17,16 @@ const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "auto";
+  }, [isMobileMenuOpen]);
+
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
+    { name: "Projects", path: "/projects" },
     { name: "Portfolio", path: "/portfolio" },
     { name: "Services", path: "/services" },
+    { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
   ];
 
@@ -34,14 +38,21 @@ const Navigation = () => {
     <nav
       className={cn(
         "fixed w-full z-50 transition-all duration-300 py-6 px-6 md:px-12",
-        isScrolled 
-          ? "bg-white bg-opacity-90 backdrop-blur-sm shadow-sm py-4" 
+        isScrolled
+          ? "bg-white bg-opacity-90 backdrop-blur-sm shadow-sm py-4"
           : "bg-transparent"
       )}
     >
-      <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="font-serif text-2xl md:text-3xl text-photo-dark">
-          <span className={cn("transition-all duration-300", isScrolled ? "" : "text-white text-shadow")}>Elegance</span>
+      <div className=" mx-auto flex justify-between items-center">
+        <Link
+          to="/"
+          className="font-serif text-2xl md:text-3xl text-photo-dark"
+        >
+          <img
+            src="/assets/images/vrukkshy_logo.png"
+            alt="logo"
+            className="h-16 "
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -51,10 +62,14 @@ const Navigation = () => {
               key={link.path}
               to={link.path}
               className={cn(
-                "nav-link text-sm font-medium transition-colors",
-                location.pathname === link.path 
-                  ? "text-photo-accent" 
-                  : isScrolled ? "text-photo-dark hover:text-photo-accent" : "text-white hover:text-white/80",
+                "nav-link text-lg font-medium transition-colors",
+                location.pathname === link.path
+                  ? isScrolled
+                    ? "text-photo-accent"
+                    : "text-[#00ffcf]"
+                  : isScrolled
+                  ? "text-photo-dark hover:text-photo-accent"
+                  : "text-white hover:text-white/80"
               )}
             >
               {link.name}
@@ -62,9 +77,9 @@ const Navigation = () => {
           ))}
 
           <div className="flex items-center space-x-4 ml-4">
-            <a 
-              href="https://instagram.com" 
-              target="_blank" 
+            <a
+              href="https://instagram.com"
+              target="_blank"
               rel="noopener noreferrer"
               className={cn(
                 "transition-opacity hover:opacity-70",
@@ -73,9 +88,9 @@ const Navigation = () => {
             >
               <Instagram size={18} />
             </a>
-            <a 
-              href="https://facebook.com" 
-              target="_blank" 
+            <a
+              href="https://facebook.com"
+              target="_blank"
               rel="noopener noreferrer"
               className={cn(
                 "transition-opacity hover:opacity-70",
@@ -90,32 +105,29 @@ const Navigation = () => {
         {/* Mobile Menu Button */}
         <button
           className={cn(
-            "lg:hidden flex flex-col justify-center items-center space-y-1.5 focus:outline-none",
-            isScrolled ? "text-photo-dark" : "text-white"
+            "lg:hidden flex flex-col justify-center items-center space-y-1.5 focus:outline-none fixed top-9 right-6 z-50", // ← Fixed position
+            isScrolled ? "text-photo-dark" : "text-blue-500"
           )}
           onClick={toggleMobileMenu}
           aria-label="Toggle menu"
         >
-          <span 
+          <span
             className={cn(
-              "block h-0.5 w-6 transition-all duration-300", 
-              isScrolled ? "bg-photo-dark" : "bg-white",
+              "block h-0.5 w-6 transition-all duration-300 bg-blue-500",
               isMobileMenuOpen && "rotate-45 translate-y-2"
-            )} 
+            )}
           />
-          <span 
+          <span
             className={cn(
-              "block h-0.5 w-6 transition-all duration-300", 
-              isScrolled ? "bg-photo-dark" : "bg-white",
+              "block h-0.5 w-6 transition-all duration-300 bg-blue-500",
               isMobileMenuOpen && "opacity-0"
-            )} 
+            )}
           />
-          <span 
+          <span
             className={cn(
-              "block h-0.5 w-6 transition-all duration-300", 
-              isScrolled ? "bg-photo-dark" : "bg-white",
+              "block h-0.5 w-6 transition-all duration-300 bg-blue-500",
               isMobileMenuOpen && "-rotate-45 -translate-y-2"
-            )} 
+            )}
           />
         </button>
       </div>
@@ -123,8 +135,10 @@ const Navigation = () => {
       {/* Mobile Menu */}
       <div
         className={cn(
-          "lg:hidden fixed inset-0 bg-white bg-opacity-95 flex flex-col justify-center items-center transition-all duration-300 z-40",
-          isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+          "lg:hidden fixed inset-0 h-screen w-screen bg-white flex flex-col justify-center items-center transition-all duration-300",
+          isMobileMenuOpen
+            ? "opacity-100 visible z-40"
+            : "opacity-0 invisible z-0"
         )}
       >
         <div className="flex flex-col items-center space-y-6">
@@ -132,33 +146,17 @@ const Navigation = () => {
             <Link
               key={link.path}
               to={link.path}
-              className={cn(
-                "text-lg font-medium",
-                location.pathname === link.path
-                  ? "text-photo-accent"
-                  : "text-photo-dark hover:text-photo-accent"
-              )}
               onClick={() => setIsMobileMenuOpen(false)}
+              className="text-lg font-medium text-photo-dark hover:text-photo-accent"
             >
               {link.name}
             </Link>
           ))}
-
           <div className="flex items-center space-x-6 mt-8">
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-photo-dark hover:text-photo-accent transition-colors"
-            >
+            <a href="#" className="text-photo-dark hover:text-photo-accent">
               <Instagram size={24} />
             </a>
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-photo-dark hover:text-photo-accent transition-colors"
-            >
+            <a href="#" className="text-photo-dark hover:text-photo-accent">
               <Facebook size={24} />
             </a>
           </div>

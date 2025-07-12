@@ -73,7 +73,7 @@ const About = () => {
             <AnimatedSection animation="fade-left" className="space-y-6">
               <h2 className="font-serif text-3xl md:text-4xl">Our Story</h2>
               <p className="text-gray-700">
-                Founded in 2010, Elegance Photography began with a simple mission: to capture 
+                Founded in 2010, Vrukshy film's Photography began with a simple mission: to capture 
                 authentic moments with an artistic eye. What started as a solo endeavor has grown into 
                 a team of talented photographers, each bringing their unique perspective and expertise.
               </p>

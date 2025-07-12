@@ -1,56 +1,65 @@
-
-import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import initEmailJS, { sendContactEmail } from "@/utils/emailjs";
+import { useEffect, useState } from "react";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    contactNumber: "",
     subject: "",
     message: "",
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+
+  useEffect(() => {
+    initEmailJS();
+  }, []);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
-  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Simple validation
+
     if (!formData.name || !formData.email || !formData.message) {
       toast.error("Please fill in all required fields.");
       return;
     }
-    
+
     if (!validateEmail(formData.email)) {
       toast.error("Please enter a valid email address.");
       return;
     }
-    
+
     setIsSubmitting(true);
-    
-    // Simulating API call for form submission
+
     try {
-      // In a real implementation, you would send this data to your backend or use a service like EmailJS
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      
-      toast.success("Message sent successfully! We'll get back to you soon.");
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-      });
+      const response = await sendContactEmail(formData);
+
+      if (response.success) {
+        toast.success("Message sent successfully! We'll get back to you soon.");
+        setFormData({
+          name: "",
+          email: "",
+          contactNumber: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        toast.error("Failed to send message. Please try again later.");
+      }
     } catch (error) {
       toast.error("Failed to send message. Please try again later.");
       console.error("Form submission error:", error);
@@ -58,11 +67,11 @@ const ContactForm = () => {
       setIsSubmitting(false);
     }
   };
-  
+
   const validateEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
-  
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -80,7 +89,7 @@ const ContactForm = () => {
             required
           />
         </div>
-        
+
         <div className="space-y-2">
           <label htmlFor="email" className="text-sm font-medium">
             Email <span className="text-red-500">*</span>
@@ -96,8 +105,23 @@ const ContactForm = () => {
             required
           />
         </div>
+
+        <div className="space-y-2 md:col-span-2">
+          <label htmlFor="contactNumber" className="text-sm font-medium">
+            Contact Number
+          </label>
+          <Input
+            id="contactNumber"
+            name="contactNumber"
+            value={formData.contactNumber}
+            onChange={handleChange}
+            placeholder="Your phone number"
+            className="w-full p-3 border rounded-md bg-white/90"
+            maxLength={10}
+          />
+        </div>
       </div>
-      
+
       <div className="space-y-2">
         <label htmlFor="subject" className="text-sm font-medium">
           Subject
@@ -111,7 +135,7 @@ const ContactForm = () => {
           className="w-full p-3 border rounded-md bg-white/90"
         />
       </div>
-      
+
       <div className="space-y-2">
         <label htmlFor="message" className="text-sm font-medium">
           Message <span className="text-red-500">*</span>
@@ -126,7 +150,7 @@ const ContactForm = () => {
           required
         />
       </div>
-      
+
       <Button
         type="submit"
         className="bg-photo-accent hover:bg-photo-accent/90 text-white py-3 px-6 rounded-md font-medium transition-all"

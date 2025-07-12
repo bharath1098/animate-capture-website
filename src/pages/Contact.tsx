@@ -40,7 +40,7 @@ const Contact = () => {
                     <Mail className="mr-4 text-photo-accent" />
                     <div>
                       <h3 className="font-medium mb-1">Email Us</h3>
-                      <p className="text-gray-600">info@elegancephotography.com</p>
+                      <p className="text-gray-600">info@Vrukshy film'sphotography.com</p>
                       <p className="text-gray-500 text-sm mt-1">We typically respond within 24 hours</p>
                     </div>
                   </div>

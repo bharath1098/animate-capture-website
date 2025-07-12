@@ -14,7 +14,7 @@ const Services = () => {
       title: "Portrait Photography",
       description: "Capture your authentic self with our professional portrait photography services.",
       image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
-      pricing: "From $299",
+      pricing: "From ₹4,999",
       link: "/contact",
       features: [
         "Indoor & outdoor sessions",
@@ -28,7 +28,7 @@ const Services = () => {
       title: "Wedding Photography",
       description: "Document every precious moment of your special day with our wedding photography packages.",
       image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e",
-      pricing: "From $1,499",
+      pricing: "From ₹49,999",
       link: "/contact",
       features: [
         "Full day coverage",
@@ -53,35 +53,37 @@ const Services = () => {
       ],
     },
   ];
+  
 
   const additionalServices = [
     {
       title: "Event Coverage",
       description: "Complete documentation of your special events, from corporate gatherings to milestone celebrations.",
       image: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
-      pricing: "From $599",
+      pricing: "From ₹14,999",
       link: "/contact",
     },
     {
       title: "Family Portraits",
       description: "Preserve precious family moments with beautiful, natural family portrait sessions.",
       image: "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86",
-      pricing: "From $349",
+      pricing: "From ₹5,999",
       link: "/contact",
     },
     {
       title: "Fine Art Prints",
       description: "Premium quality prints of our landscape and fine art photography for your home or office.",
       image: "https://images.unsplash.com/photo-1504893524553-b855bce32c67",
-      pricing: "From $99",
+      pricing: "From ₹1,499",
       link: "/contact",
     },
   ];
+  
 
   const pricingPackages = [
     {
       name: "Essential",
-      price: "$299",
+      price: "₹4,999",
       description: "Perfect for individuals needing professional portraits",
       features: [
         "1-hour session",
@@ -93,7 +95,7 @@ const Services = () => {
     },
     {
       name: "Premium",
-      price: "$499",
+      price: "₹8,999",
       description: "Ideal for families and extended portrait sessions",
       features: [
         "2-hour session",
@@ -102,13 +104,13 @@ const Services = () => {
         "25 digital images",
         "Advanced retouching",
         "Online gallery",
-        "Print credit ($100)",
+        "Print credit (₹2,000)",
       ],
       highlighted: true,
     },
     {
       name: "Ultimate",
-      price: "$899",
+      price: "₹14,999",
       description: "Comprehensive package for complete coverage",
       features: [
         "4-hour session",
@@ -117,11 +119,12 @@ const Services = () => {
         "All digital images",
         "Premium retouching",
         "Online gallery",
-        "Print credit ($250)",
+        "Print credit (₹5,000)",
         "Fine art album",
       ],
     },
   ];
+  
 
   return (
     <Layout>
@@ -182,7 +185,7 @@ const Services = () => {
                   <div className="p-6">
                     <h3 className="font-serif text-xl mb-2">{service.title}</h3>
                     <p className="text-photo-accent font-medium mb-3">{service.pricing}</p>
-                    <p className="text-gray-600 mb-6">{service.description}</p>
+                    <p className="text-gray-600 mb-6 h-16">{service.description}</p>
                     <Button
                       asChild
                       className="bg-photo-accent hover:bg-photo-accent/90 text-white w-full"
@@ -263,12 +266,12 @@ const Services = () => {
           <AnimatedSection animation="fade-up" className="text-center mb-16">
             <h2 className="font-serif text-3xl md:text-4xl mb-4">Our Process</h2>
             <div className="w-24 h-1 bg-photo-accent mx-auto mb-6"></div>
-            <p className="max-w-2xl mx-auto text-gray-600">
+            <p className="max-w-full mx-auto text-gray-600">
               From initial consultation to final delivery, here's how we bring your photography vision to life.
             </p>
           </AnimatedSection>
 
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl mx-auto flex flex-col gap-5">
             {[
               {
                 step: "1",
@@ -322,7 +325,7 @@ const Services = () => {
             <div className="w-24 h-1 bg-photo-accent mx-auto mb-6"></div>
           </AnimatedSection>
 
-          <div className="max-w-3xl mx-auto space-y-6">
+          <div className="max-w-full mx-auto space-y-6">
             {[
               {
                 question: "How far in advance should I book my photography session?",

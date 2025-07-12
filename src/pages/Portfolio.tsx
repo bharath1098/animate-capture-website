@@ -118,10 +118,10 @@ const Portfolio = () => {
               defaultValue="all" 
               value={activeCategory}
               onValueChange={setActiveCategory}
-              className="w-full"
+              className="w-[90%]  lg:w-full relative mx-auto"
             >
-              <div className="flex justify-center mb-8">
-                <TabsList className="bg-gray-100 p-1">
+              <div className="flex justify-center mb-8 max-w-[100%] ">
+                <TabsList className="bg-gray-100 p-1 ">
                   {categories.map(category => (
                     <TabsTrigger 
                       key={category.id}

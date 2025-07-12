@@ -38,7 +38,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         {pricing && <CardDescription className="font-medium text-photo-accent">{pricing}</CardDescription>}
       </CardHeader>
       <CardContent>
-        <p className="text-gray-600 mb-4">{description}</p>
+        <p className="text-gray-600 mb-4 h-20">{description}</p>
         {features.length > 0 && (
           <ul className="space-y-2 mt-4">
             {features.map((feature, index) => (
