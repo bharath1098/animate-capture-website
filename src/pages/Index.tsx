@@ -54,12 +54,7 @@ const Index = () => {
     title: "Royal Union",
     subtitle: "A majestic wedding amidst Mysore's heritage",
   },
-  {
-    src: "https://1drv.ms/i/c/2a8c0acff387c2aa/IQQSViAJZ0hMRpzkeg98Ug3_AQSW2TsK2Fy3LtXNzpSwG1g?width=1024",
-    alt: "Traditional attire in Hampi",
-    title: "Timeless Elegance",
-    subtitle: "Showcasing fashion against ancient ruins",
-  },
+ 
   {
     src: "https://1drv.ms/i/c/2a8c0acff387c2aa/IQTNBE67Si83TKBmbHkLRRvpATT8PrfIO6K4R4a4QChsMYg?width=1024",
     alt: "Fashion photoshoot in the streets of Bangalore",
@@ -79,7 +74,7 @@ const Index = () => {
     subtitle: "Capturing the magic of dusk in the Western Ghats",
   },
   {
-    src: "https://1drv.ms/i/c/2a8c0acff387c2aa/IQScMCI_Nya4T4DyXCggjFNgARrMRWLHPnv0LJeX--S9U6U?width=1024",
+    src: "/assets/images/waterfalls.jpeg",
     alt: "Waterfalls in the forests of Karnataka",
     title: "Mystic Falls",
     subtitle: "The enchanting waterfalls of Karnataka",
